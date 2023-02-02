@@ -98,6 +98,7 @@ def author_page(request, slug):
     top_posts = Post.objects.filter(author=profile.user).order_by('-count_views')[0:2]
     new_posts = Post.objects.filter(author=profile.user).order_by('-last_update')[0:3]
     top_authors = User.objects.annotate(number=Count('post')).order_by('-number')
+    
 
     context = {'profile': profile, 'top_authors': top_authors, 'top_posts': top_posts,'new_posts': new_posts}
     return render(request, 'app/author.html', context)

@@ -21,7 +21,7 @@ class Profile(models.Model):
         if not self.id:
             self.slug = slugify(self.user.username)
         return super(Profile, self).save(*args, **kwargs)
-
+        
         # if not self.id:
             # if self.name not in self.objects.all():
             #     self.slug = slugify(self.name)
