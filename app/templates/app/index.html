@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    BLOG | Welcome
+{% endblock title %}
+
+{% block content %}
+    
+<main class="sp">
+    <div class="container">
+      <center>
+        <div class="search-bar">
+          <a href={% url 'search_page' %}>
+          <input type="text" placeholder="Search" />
+          <div class="animated-search" onclick="searchbar()">
+            <i class="uil uil-search"></i>
+          </div>
+        </a>
+        </div>
+        <div class="typo">
+          {% if website_info %}
+            <h1 class="title">{{website_info.title}}</h1>
+            <p>
+              {{website_info.description}}
+            </p>
+          {% endif %}
+
+        </div>
+        <div class="newsletter">
+          {% if subscribe_successful %}
+            <br>
+            <p> {{subscribe_successful}} </p>
+          {% else %}
+          <form method="POST">
+            {% csrf_token %}
+            {{subscribe_form.email}}
+            <button class="btn btn-primary">Subscribe</button>
+          </form>
+          {% endif %}
+        </div>
+      </center>
+    </div>
+  </main>
+  {% if feature_blog %}
+  <section class="sp">
+    <div class="container">
+      <div class="grid-2">
+        <div class="post-img">
+          <img src={{feature_blog.image.url}} alt="" />
+        </div>
+        <div class="post-content">
+          <div class="cetagory">
+            <p>{{feature_blog.tags.all.0.name}}</p>
+          </div>
+          <h1>
+            {{feature_blog.title}}
+          </h1>
+          <p class="des">
+            {{feature_blog.content|truncatechars:200|safe}}
+          </p>
+          <a class="learn" href={% url 'post_page' feature_blog.slug %}>
+            Learn more <span class="material-icons"> trending_flat </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+  <section class="sp">
+    <div class="container">
+      <h1 class="sec-title">Top blogs</h1>
+      <div class="grid-3">
+        {% for post in top_blogs %}
+        <!-- card -->
+        <a href={% url 'post_page' post.slug %}>
+          <div class="card">
+            <div class="post-img">
+              <img src={{post.image.url}} alt="" />
+              <div class="tag">{{post.tags.all.0.name}}</div>
+            </div>
+            <div class="card-content">
+              <h3>
+                {{post.title}}
+              </h3>
+                <div class="author">
+                  <div class="profile-pic">
+                    <img src={{post.author.profile.profile_image.url}} alt="" />
+                  </div>
+                  <div class="details">
+                    <p>{{post.author.first_name}}</p>
+                    <small>{{post.last_update|date}}</small>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </a>
+        <!-- card end-->
+        {% endfor %}
+      
+      </div>
+      <center>
+        <a href={% url 'all_posts'%}><button class="btn btn-primary rounded view">
+          View more <span class="material-icons"> trending_flat </span>
+        </button></a>
+      </center>
+    </div>
+  </section>
+  <section class="sp">
+    <div class="container">
+      <h1 class="sec-title">New blogs</h1>
+      <div class="grid-3">
+        {% for post in new_blogs %}
+        
+        <!-- card -->
+        <a href={% url 'post_page' post.slug %}>
+            <div class="card">
+              <div class="post-img">
+                <img src={{post.image.url}} alt="" />
+                <div class="tag">{{post.tags.all.0.name}}</div>
+              </div>
+              <div class="card-content">
+                <h3>
+                  {{post.title}}
+                </h3>
+                <div class="author">
+                  <div class="profile-pic">
+                    <img src={{post.author.profile.profile_image.url}} alt="" />
+                  </div>
+                  <div class="details">
+                    <p>{{post.author.first_name}}</p>
+                    <small>{{post.last_update|date}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        <!-- card end-->
+        {% endfor %}
+      </div>
+      <center>
+        {% comment %} change the value of query parameter {% endcomment %}
+        <a href='{% url "all_posts" %}?order=-last_update'><button class="btn btn-primary rounded view"> 
+          View more <span class="material-icons"> trending_flat </span>
+        </button></a>
+      </center>
+    </div>
+  </section>
+
+{% endblock content %}
+
+
+

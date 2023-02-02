@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    BLOG | Log in
+{% endblock title %}
+
+{% block content %}
+
+    <form class="form" method="post">
+        {% csrf_token %}
+        <center>
+        <div class="logo f-logo">
+            <a href={% url 'index' %}><i class="fa-brands fa-blogger"></i></a>
+        </div>
+        </div>
+        {% if error_message %}
+        <div class="field-error">
+          <p>
+            {{error_message}}
+          </p>
+        </div>
+        {% endif %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        <div class="inputs">
+          <div>
+          <div class="search-bar s-active input">
+            {{form.user_name}}
+            <div class="animated-search">
+              <i class="uil uil-envelope-alt"></i>
+            </div>
+          </div>
+          <div class="search-bar s-active input">
+            {{form.password}}
+            <div class="animated-search">
+              <i class="uil uil-key-skeleton"></i>
+            </div>
+          </div>
+          </div>
+          <button class="btn btn-primary rounded" type="submit">
+            Login <span class="material-icons"> arrow_right_alt </span>
+          </button>
+          <p>Not have an account? <a href={% url 'sign_up' %}>Sign up</a></p>
+        </div>
+      </center>
+    </form>
+
+{% endblock content %}
+
+
+
+ 

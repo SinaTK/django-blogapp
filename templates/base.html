@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href={% static 'app/style.css' %} />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+
+    <title>{% block title %} BLOG {% endblock  %}</title>
+  </head>
+  <body>
+    <header>
+      <a href={% url 'index' %}> 
+      <div class="container container-fluid">
+          <div class="logo">
+          <i class="fa-brands fa-blogger"></i>
+        </div>
+      </a>
+        <div class="links">
+          <a href={% url 'index' %}>Home</a>
+          <a href={% url 'about_page' %}>About</a>
+          <a href={% url 'all_posts'%}>All Posts</a>
+        </div>
+        <div class="action-btn">
+          {% if log_in %}
+            <p>{{username}}</p>
+            <form action='actionUrl' method='GET'>
+            <button class="btn btn-primary">Log out</button>
+            </form>
+          {% else %}
+            <a href={% url 'log_in' %}><button class="btn btn-scoundary">Login</button></a>
+            <a href={% url 'sign_up' %}><button class="btn btn-primary">Sign Up</button></a>
+          {% endif %}
+          <i class="uil uil-align-center-alt menu" onclick="menu()"></i>
+        </div>
+      </div>
+    </header>
+    <main>
+        {% block content %}
+
+        {% endblock content %}
+    </main>
+    <footer>
+      <div class="container">
+        <div class="grid-4">
+          <div class="logo f-logo">
+            <i class="fa-brands fa-blogger"></i>
+          </div>
+          <div class="link">
+            <h2>Quick link</h2>
+            <div class="q-link">
+              <a href={% url 'index' %}>Home</a>
+              <a href={% url 'about_page' %}>About</a>
+              <a href={% url 'all_posts'%}>All Posts</a>
+            </div>
+          </div>
+          <div class="link">
+            {% if log_in %}
+            <h2>{{username}}</h2>
+              {% comment %} <form action='actionUrl' method='GET'>
+              <button class="btn btn-primary">Log out</button>
+              </form>            {% endcomment %}
+              <a href={% url 'log_out' %}>Log out</a>
+            {% else %}
+            <h2>Subscribe with me</h2>
+            <div class="q-link">
+              <a href={% url 'log_in' %}>Login</a>
+              <a href={% url 'sign_up' %}>Register</a>
+            </div>
+            {% endif %}
+          </div>
+          <div class="news-signup">
+            <h2>Subscribe</h2>
+            <div class="newsletter">
+              
+              {% if subscribe_successful %}
+              <br>
+              <p> {{subscribe_successful}} </p>
+              {% else %}
+              <form method="POST">
+                {% csrf_token %}
+                {{subscribe_form.email}}
+                <button class="btn btn-primary">Subscribe</button>
+              </form>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="share">
+          <div class="social">
+            <a href="#">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="#">
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src={% static 'app/url.js' %} id="url"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} BLOG | About {% endblock title %}
+
+{% block content %}
+<main>  
+        
+        <div class="container">
+            <center>
+                <div class="typo">
+                    <h1 class="title">{{website_info.title}}</h1>
+                    <p>{{website_info.description}}</p>            
+                </div>
+            </center>
+        </div>
+               
+        <section class="sp">
+            <div class="container">
+                <h1>  About </h1>
+                <p>{{website_info.about|safe}}</p>
+            </div>
+        </section>
+    </main>
+{% endblock content %}
+
+        
