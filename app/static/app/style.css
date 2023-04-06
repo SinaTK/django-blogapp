@@ -1064,3 +1064,10 @@ main {
 .reply button {
   background: transparent;
 }
+
+.success-message{
+  
+  background-color: darkorange;
+  font-size: 3rem;
+  
+}

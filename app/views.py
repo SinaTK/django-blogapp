@@ -140,6 +140,7 @@ def log_in_user(request, username: str):
 
 def log_out(request):
     request.session['log_in'] = False
+    messages.success(request, 'You log out successfully', extra_tags='success-message')
     return HttpResponseRedirect(reverse('index'))
 
 
@@ -177,6 +178,7 @@ def log_in(request):
                 if user.password == pas:
                     # messages.success(request, 'Form submission successful')
                     log_in_user(request, username)
+                    messages.success(request, 'You log in successfully', extra_tags='learn')
                     return HttpResponseRedirect(reverse('index'))
                 else:
                     error_message = 'incorrect password'
