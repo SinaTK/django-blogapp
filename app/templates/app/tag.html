@@ -28,7 +28,7 @@
               <!-- card -->
              
                 <div class="card">
-                  <a href={% url 'post_page' post.slug%}>
+                  <a href={% url 'home:post_page' post.slug%}>
                   <div class="post-img">
                     <img src={{post.image.url}} alt="" />
                     <div class="tag">{{tag.name}}</div>
@@ -64,7 +64,7 @@
             <div class="grid-3 blog-grid">
                 {% for post in new_posts %}
                 <!-- card -->
-                <a href={% url 'post_page' post.slug%}>
+                <a href={% url 'home:post_page' post.slug%}>
                   <div class="card">
                     <div class="post-img">
                       <img src={{post.image.url}} alt="" />
@@ -90,7 +90,7 @@
                 {% endfor  %}
             </div>
             <center>
-              <a href='{% url "all_posts" %}?tag={{tag.name}}'>
+              <a href='{% url "home:all_posts" %}?tag={{tag.name}}'>
               <button class="btn btn-primary rounded view">
                 View more
                 <span class="material-icons"> trending_flat </span>
@@ -110,7 +110,7 @@
           <!-- More Tags -->
           <div class="blog-tags">
             {% for tag in tags %}
-                <a href={% url 'tag_page' tag.slug %}>   
+                <a href={% url 'home:tag_page' tag.slug %}>   
                 <div class="tag">{{tag.name}}</div>
                 </a>
             {% endfor %}

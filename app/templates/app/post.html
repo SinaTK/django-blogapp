@@ -53,12 +53,12 @@
                 </p>
                 <div class="blog-tags">
                   {% for tag in post.tags.all %}
-                    <a href={% url 'tag_page' tag.slug %}>
+                    <a href={% url 'home:tag_page' tag.slug %}>
                     <div class="tag">{{tag.name}}</div>
                     </a>
                   {% endfor %}
                 </div>
-                <a href= {% url 'author_page' post.author.profile.slug %}>
+                <a href= {% url 'home:author_page' post.author.profile.slug %}>
                 <div class="author">
                   <div class="profile-pic">
                     <img src={{post.author.profile.profile_image.url}} alt="" />
@@ -72,11 +72,11 @@
                 <div class="social-share">
                   <div class="reactions">
                     <div class="likes">
-                      <i class="uil uil-heart"></i> <span>200</span>
+                      <a href= {% url 'home:like_post' post.id %}><i class="uil uil-heart"></i> <span>{{likes}}</span></a>
                     </div>
                     <div class="total-comments">
                       <i class="uil uil-comment-alt"></i>
-                      <span>10</span>
+                      <span>{{comments_count}}</span>
                     </div>
                   </div>
                   <div class="share">
@@ -219,7 +219,7 @@
               <h3>
                 {{post.title}}
               </h3>
-              <a class="learn" href={% url 'post_page' post.slug %}>
+              <a class="learn" href={% url 'home:post_page' post.slug %}>
                 Learn more
                 <span class="material-icons"> trending_flat </span></a
               >
@@ -233,7 +233,7 @@
           <h2 class="title2">This Author</h2>
           {% for post in author_posts %}
           <!-- card -->
-          <a href={% url 'post_page' post.slug%}>
+          <a href={% url 'home:post_page' post.slug%}>
             <div class="card">
               <div class="post-img">
                 <img src={{post.image.url}} alt="" />
@@ -264,7 +264,7 @@
             <p>
               {{post.content|truncatechars:150|safe}}
             </p>
-            <a class="learn" href={% url 'post_page' post.slug%}>
+            <a class="learn" href={% url 'home:post_page' post.slug%}>
               Learn more<span class="material-icons">trending_flat</span>
             </a>
           </div>
@@ -275,7 +275,7 @@
           <h2 class="title2">Top Tags</h2>
           <div class="blog-tags">
             {% for tag in tags %}
-            <a href={% url 'tag_page' tag.slug%}>
+            <a href={% url 'home:tag_page' tag.slug%}>
             <div class="tag">{{tag.name}}</div>
             </a>
             {% endfor %}

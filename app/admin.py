@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import BlogUser, Post, Profile, Tag, Comments, WebsiteMeta
+from app.models import Post, Profile, Tag, Comments, WebsiteMeta, Vote
 
 # Register your models here.
 class ProfileAdmin(admin.ModelAdmin):
@@ -10,8 +10,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'count_views'] 
     exclude = ['slug']
 
-class BlogUserAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'user_name']
+
 
 class Blogadmin(admin.ModelAdmin):
     admin.site.register(Post, PostAdmin)
@@ -19,4 +18,4 @@ class Blogadmin(admin.ModelAdmin):
     admin.site.register(Tag)
     admin.site.register(Comments)
     admin.site.register(WebsiteMeta)
-    admin.site.register(BlogUser, BlogUserAdmin)
+    admin.site.register(Vote)

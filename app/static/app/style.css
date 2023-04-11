@@ -273,7 +273,7 @@ header .container {
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--red);
+  color: orangered;
   margin-top: 2rem;
 }
 
@@ -1067,7 +1067,14 @@ main {
 
 .success-message{
   
-  background-color: darkorange;
+  background-color: greenyellow;
+  font-size: 3rem;
+  
+}
+
+.error-message{
+  
+  background-color: orangered;
   font-size: 3rem;
   
 }
