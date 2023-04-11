@@ -1,0 +1,26 @@
+<header>
+    <a href={% url 'home:index' %}> 
+    <div class="container container-fluid">
+        <div class="logo">
+        <i class="fa-brands fa-blogger"></i>
+      </div>
+    </a>
+      <div class="links">
+        <a href={% url 'home:index' %}>Home</a>
+        <a href={% url 'home:about_page' %}>About</a>
+        <a href={% url 'home:all_posts'%}>All Posts</a>
+      </div>
+
+      <div class="action-btn">
+    
+        {% if user.is_authenticated %}
+          <p>{{user.username}}</p>
+          <a href={% url 'accounts:logout_user' %} class="btn btn-scoundary">Log Out</a>
+        {% else %}
+          <a href={% url 'accounts:login_user' %} class="btn btn-scoundary">Login</a>
+          <a href={% url 'accounts:register_user' %} class="btn btn-primary">Register</a>
+        {% endif %}
+        <i class="uil uil-align-center-alt menu" onclick="menu()"></i>
+      </div>
+    </div>
+  </header>

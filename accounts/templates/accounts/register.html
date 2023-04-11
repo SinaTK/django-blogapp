@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    BLOG | Sign Up
+    BLOG | Register
 {% endblock title %}
 
 
@@ -9,17 +9,18 @@
 
   <form class="form" method='post'>
     {% csrf_token %}
+
     <center>
       <div class="logo f-logo">
-        <a href={% url 'index' %}><i class="fa-brands fa-blogger"></i></a>
+        <a href={% url 'home:index' %}><i class="fa-brands fa-blogger"></i></a>
       </div>
-      {% if error_message %}
-      <div class="field-error">
-        <p>
-          {{error_message}}
-        </p>
-      </div>
-      {% endif %}
+
+      <ul>
+        {% for error in form.non_field_errors %}
+            <li class='val_err'><h2 style='color: maroon;'>{{ error }}</h2></li>    
+        {% endfor %}
+      </ul>
+      
       <div class="inputs">
         <div class="search-bar s-active input">
           {{form.first_name}}
@@ -33,36 +34,48 @@
             <i class="uil uil-user"></i>
           </div>
         </div>
+        <ul>
+          {% for error in form.username.errors %}
+              <li class='val_err'><h2 style='color: maroon;'>{{ error }}</h2></li>    
+          {% endfor %}
+        </ul>
         <div class="search-bar s-active input">
-          {{form.user_name}}
+          {{form.username}}
           <div class="animated-search">
             <i class="uil uil-user"></i>
           </div>
         </div>
+        <ul>
+          {% for error in form.email.errors %}
+              <li class='val_err'><h2 style='color: maroon;'>{{ error }}</h2></li>    
+          {% endfor %}
+        </ul>
         <div class="search-bar s-active input">
           {{form.email}}
           <div class="animated-search">
             <i class="uil uil-envelope-alt"></i>
           </div>
         </div>
-        <div class="search-bar s-active input">
+         <div class="search-bar s-active input">
           {{form.password}}
           <div class="animated-search">
             <i class="uil uil-key-skeleton"></i>
           </div>
         </div>
-        <div class="search-bar s-active input">
+            <div class="search-bar s-active input">
           {{form.password_2}}
           <div class="animated-search">
             <i class="uil uil-key-skeleton"></i>
           </div>
-        </div>
+        </div>   
+
+        {% comment %} {{form.as_p}} {% endcomment %}
 
         <button class="btn btn-primary rounded">
           SIGN UP <span class="material-icons"> arrow_right_alt </span>
         </button>
         <center>
-          <p>Already have an account? <a href={% url 'log_in' %}>Login</a></p>
+          <p>Already have an account? <a href={% url 'accounts:login_user' %}>Login</a></p>
         </center>
       </div>
     </center>
