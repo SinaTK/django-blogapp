@@ -25,18 +25,6 @@
           {% endif %}
 
         </div>
-        <div class="newsletter">
-          {% if subscribe_successful %}
-            <br>
-            <p> {{subscribe_successful}} </p>
-          {% else %}
-          <form method="POST">
-            {% csrf_token %}
-            {{subscribe_form.email}}
-            <button class="btn btn-primary">Subscribe</button>
-          </form>
-          {% endif %}
-        </div>
       </center>
     </div>
   </main>

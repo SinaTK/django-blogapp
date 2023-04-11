@@ -27,22 +27,7 @@
           </div>
           {% endif %}
         </div>
-        <div class="news-signup">
-          <h2>Subscribe</h2>
-          <div class="newsletter">
-            
-            {% if subscribe_successful %}
-            <br>
-            <p> {{subscribe_successful}} </p>
-            {% else %}
-            <form method="POST">
-              {% csrf_token %}
-              {{subscribe_form.email}}
-              <button class="btn btn-primary">Subscribe</button>
-            </form>
-            {% endif %}
-          </div>
-        </div>
+   
       </div>
       <div class="share">
         <div class="social">

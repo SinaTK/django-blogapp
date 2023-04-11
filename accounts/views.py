@@ -1,9 +1,12 @@
 from django.shortcuts import redirect, render
 from django.views import View
+from django.urls import reverse_lazy
 from accounts.forms import LoginForm, RegisterForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.contrib.auth import views as auth_views
+
 
 
 # Create your views here.
@@ -75,4 +78,19 @@ class UserLogoutView(View):
         logout(request)
         messages.success(request, 'You log out successfully.')
         return redirect('home:index')
+
+class UserPasswordResetView(auth_views.PasswordResetView):
+    template_name = 'accounts/password_reset_form.html'
+    email_template_name = 'accounts/password_reset_email.html'
+    success_url = reverse_lazy('accounts:password_reset_done')
+
+class UserPasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name = 'accounts/password_reset_done.html'
+
+class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = 'accounts/password_reset_confirm.html'
+    success_url = reverse_lazy('accounts:password_reset_complete')
+
+class UserPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name = 'accounts/password_reset_complete.html'
 
