@@ -4,7 +4,8 @@ from app.forms import CommentForm, SubscribeForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.db.models import Count
+from django.db.models import Count, QuerySet
+from django.db.models import QuerySet as Q
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -112,7 +113,7 @@ def search_page(request):
     posts = []
     if request.GET.get('q'):
         search_query = request.GET.get('q')
-        posts = Post.objects.filter(title__icontains=search_query)
+        posts = Post.objects.filter(Q(title__icontains=search_query) | Q(title__icontains=search_query))
 
 
     context = {'posts':posts, 'search_query':search_query}

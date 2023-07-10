@@ -24,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY =os.getenv('SECRET_KEY', 'django-insecure-lv4vlm2^_s&tt!^id7@pkfibr@40poaop!#xgf40fnl6p=%-vr')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('IS_DEVLOPMENT', True)
+# DEBUG = os.getenv('IS_DEVLOPMENT', True)
+DEBUG = False
+
 
 ALLOWED_HOSTS = [os.getenv('APP_HOST'),
                 '127.0.0.1']
@@ -41,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'accounts.apps.AccountsConfig',
+
+    # third party apps
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +91,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -121,7 +125,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR/ 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'upload/'
@@ -131,7 +135,19 @@ MEDIA_ROOT = BASE_DIR / 'upload/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+                   
+# Arvan Cloud Storage
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'       # because the django version < 4.2
+AWS_S3_ACCESS_KEY_ID = 'ed05f894-5471-4b4c-9ba7-8e4abb9919aa'
+AWS_S3_SECRET_ACCESS_KEY = 'd944e0b50f8dead007e85d963bb3a421761ee892' 
+AWS_S3_ENDPOINT_URL = "https://s3.ir-thr-at1.arvanstorage.com"
+                                
+AWS_STORAGE_BUCKET_NAME = 'django-blogapp'
+AWS_SERVICE_NAME = 's3' 
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_LOCAL_STORAGE = '{}/aws/'.format(BASE_DIR)
 
 
 # google account settings
