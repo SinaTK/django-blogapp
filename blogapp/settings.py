@@ -28,9 +28,9 @@ SECRET_KEY =os.getenv('SECRET_KEY', 'django-insecure-lv4vlm2^_s&tt!^id7@pkfibr@4
 DEBUG = False
 
 
-ALLOWED_HOSTS = [os.getenv('APP_HOST'),
-                '127.0.0.1']
-
+# ALLOWED_HOSTS = [os.getenv('APP_HOST'),
+#                 '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
